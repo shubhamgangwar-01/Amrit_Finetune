@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puyi Historical AI Project | Fine-Tuning Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Puyi Historical AI</div>
+            <ul class="nav-menu">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#dataset">Dataset</a></li>
+                <li><a href="#model">Model</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#documentation">Documentation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Fine-Tuning ERNIE-4.5-0.3B-PT</h1>
+                <p class="hero-subtitle">A Historical Conversational AI for Pu Yi, the Last Emperor of China</p>
+                <div class="hero-meta">
+                    <span>Author: Shubham Gangwar</span>
+                    <span>•</span>
+                    <span>December 2025</span>
+                    <span>•</span>
+                    <span>Version 1.0</span>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#overview" class="btn btn-primary">Explore Project</a>
+                    <a href="#documentation" class="btn btn-secondary">View Documentation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section id="overview" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Executive Summary</h2>
+            <div class="content-box">
+                <p class="lead">This project presents a comprehensive approach to creating a fine-tuned Large Language Model specialized in generating contextually accurate and historically informed responses about Pu Yi (溥儀), the Last Emperor of China.</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">7,411</div>
+                        <div class="metric-label">Training Pairs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">0.3B</div>
+                        <div class="metric-label">Parameters</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2.65 MB</div>
+                        <div class="metric-label">Dataset Size</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">9</div>
+                        <div class="metric-label">Chapters</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>📚 Historical Background</h3>
+                    <p>Pu Yi (1906-1967) was the last Emperor of the Qing Dynasty, whose life spanned multiple political regimes from his ascension at age two through the fall of the Qing Dynasty, Japanese occupation, to his transformation as a citizen of the People's Republic of China.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🎯 Project Motivation</h3>
+                    <ul>
+                        <li><strong>Historical Preservation:</strong> Creating an AI system that accurately conveys historical information in first-person narrative</li>
+                        <li><strong>Educational Tool:</strong> Interactive platform for learning early 20th-century Chinese history</li>
+                        <li><strong>NLP Research:</strong> Demonstrating domain-specific fine-tuning on historical content</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Pipeline -->
+    <section id="dataset" class="section">
+        <div class="container">
+            <h2 class="section-title">Data Pipeline Architecture</h2>
+            
+            <div class="pipeline-stages">
+                <div class="pipeline-stage">
+                    <div class="stage-number">1</div>
+                    <h3>PDF Extraction</h3>
+                    <p><strong>Tool:</strong> extract_pdf_text.py</p>
+                    <p><strong>Output:</strong> 200,000+ words from "From Emperor to Citizen"</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-stage">
+                    <div class="stage-number">2</div>
+                    <h3>Chapter Segmentation</h3>
+                    <p><strong>Tool:</strong> segment_chapters.py</p>
+                    <p><strong>Output:</strong> 9 chapter files covering entire life narrative</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-stage">
+                    <div class="stage-number">3</div>
+                    <h3>Pair Generation</h3>
+                    <p><strong>Model:</strong> Google Gemini 2.5 Flash</p>
+                    <p><strong>Output:</strong> 7,411 instruction-output pairs</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-stage">
+                    <div class="stage-number">4</div>
+                    <h3>Quality Assurance</h3>
+                    <p>JSON validation, deduplication, source attribution</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-stage">
+                    <div class="stage-number">5</div>
+                    <h3>LLaMA Factory Format</h3>
+                    <p>Alpaca-compatible JSON for fine-tuning</p>
+                </div>
+            </div>
+
+            <div class="dataset-details">
+                <h3>Dataset Composition</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Chapter</th>
+                            <th>Description</th>
+                            <th>Entries</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chapter 05</td>
+                            <td>Early Imperial Life</td>
+                            <td>706</td>
+                            <td>9.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 06</td>
+                            <td>Birth & Origins</td>
+                            <td>890</td>
+                            <td>12.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 06</td>
+                            <td>Soviet Period</td>
+                            <td>918</td>
+                            <td>12.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 07</td>
+                            <td>Recognition</td>
+                            <td>945</td>
+                            <td>13.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 07</td>
+                            <td>Early Childhood</td>
+                            <td>829</td>
+                            <td>11.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 08</td>
+                            <td>Re-education</td>
+                            <td>782</td>
+                            <td>10.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 08</td>
+                            <td>Teenager Years</td>
+                            <td>816</td>
+                            <td>11.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 09</td>
+                            <td>Young Adult</td>
+                            <td>702</td>
+                            <td>9.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 10</td>
+                            <td>Middle Age</td>
+                            <td>564</td>
+                            <td>7.9%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-box mt-4">
+                <h3>Data Schema (Alpaca Format)</h3>
+                <pre class="code-block">{
+  "instruction": "Where was I born?",
+  "input": "",
+  "output": "I was born in Peking, in the mansion of Prince Chun.",
+  "source": "Chapter_06_CHAPTER_ONE"
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Architecture -->
+    <section id="model" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Model Architecture & Training</h2>
+            
+            <div class="model-info">
+                <div class="model-card">
+                    <h3>🤖 Base Model: ERNIE-4.5-0.3B-PT</h3>
+                    <p>ERNIE (Enhanced Representation through Knowledge Integration) is a pre-trained language model developed by Baidu that excels in knowledge-enhanced pre-training and multi-grain knowledge masking strategies.</p>
+                    
+                    <table class="spec-table">
+                        <tr>
+                            <td><strong>Model Name:</strong></td>
+                            <td>ERNIE-4.5-0.3B-PT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Parameters:</strong></td>
+                            <td>0.3 Billion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Architecture:</strong></td>
+                            <td>Transformer-based</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pre-training Corpus:</strong></td>
+                            <td>Large-scale Chinese and English</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fine-tuning Method:</strong></td>
+                            <td>LoRA (Low-Rank Adaptation)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="model-card">
+                    <h3>⚙️ Training Configuration</h3>
+                    <table class="spec-table">
+                        <tr>
+                            <td><strong>Learning Rate:</strong></td>
+                            <td>5e-5 to 3e-4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Batch Size:</strong></td>
+                            <td>4-8 (GPU dependent)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Training Epochs:</strong></td>
+                            <td>3-5</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LoRA Rank:</strong></td>
+                            <td>8-16</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LoRA Alpha:</strong></td>
+                            <td>16-32</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Optimizer:</strong></td>
+                            <td>AdamW</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Learning Rate Schedule:</strong></td>
+                            <td>Cosine annealing with warmup</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="hardware-requirements">
+                <h3>💻 Hardware Requirements</h3>
+                <div class="hw-cards">
+                    <div class="hw-card">
+                        <h4>Minimum</h4>
+                        <p><strong>GPU:</strong> RTX 3060 (6GB VRAM)</p>
+                        <p><strong>Training Time:</strong> 3-4 hours</p>
+                    </div>
+                    <div class="hw-card recommended">
+                        <h4>Recommended</h4>
+                        <p><strong>GPU:</strong> RTX 4090 (24GB VRAM)</p>
+                        <p><strong>Training Time:</strong> 1-2 hours</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results & Evaluation -->
+    <section id="results" class="section">
+        <div class="container">
+            <h2 class="section-title">Evaluation & Results</h2>
+            
+            <div class="quality-indicators">
+                <h3>Dataset Quality Indicators</h3>
+                <div class="quality-grid">
+                    <div class="quality-item">
+                        <span class="quality-label">Coherence Score</span>
+                        <span class="quality-value high">High</span>
+                        <p>First-person consistency maintained</p>
+                    </div>
+                    <div class="quality-item">
+                        <span class="quality-label">Factual Accuracy</span>
+                        <span class="quality-value high">High</span>
+                        <p>Grounded in primary source material</p>
+                    </div>
+                    <div class="quality-item">
+                        <span class="quality-label">Question Diversity</span>
+                        <span class="quality-value high">High</span>
+                        <p>Multiple formulations per topic</p>
+                    </div>
+                    <div class="quality-item">
+                        <span class="quality-label">Narrative Completeness</span>
+                        <span class="quality-value high">Complete</span>
+                        <p>Covers entire autobiography arc</p>
+                    </div>
+                    <div class="quality-item">
+                        <span class="quality-label">Avg Output Length</span>
+                        <span class="quality-value">~85 tokens</span>
+                    </div>
+                    <div class="quality-item">
+                        <span class="quality-label">Vocabulary Size</span>
+                        <span class="quality-value">~15,000</span>
+                        <p>Unique tokens</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sample-interactions">
+                <h3>Sample Interactions</h3>
+                <div class="interaction-box">
+                    <div class="interaction">
+                        <div class="user-message">
+                            <strong>User:</strong> When did you become emperor?
+                        </div>
+                        <div class="model-response">
+                            <strong>Model:</strong> I became emperor at the age of two in 1908, following the death of the Guangxu Emperor. I was chosen by Empress Dowager Cixi shortly before her own death...
+                        </div>
+                    </div>
+                    <div class="interaction">
+                        <div class="user-message">
+                            <strong>User:</strong> What was Manchukuo?
+                        </div>
+                        <div class="model-response">
+                            <strong>Model:</strong> Manchukuo was a puppet state established by Japan in 1932 in Northeast China (Manchuria). I served as its emperor under the regnal name Kangde, though real power was held by Japanese military authorities...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications -->
+    <section id="applications" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Use Cases & Applications</h2>
+            
+            <div class="applications-grid">
+                <div class="app-card">
+                    <div class="app-icon">🎓</div>
+                    <h3>Interactive History Lessons</h3>
+                    <p>Students can engage in conversations with "Pu Yi" to learn about early 20th-century Chinese history through first-person narrative.</p>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-icon">🏛️</div>
+                    <h3>Museum & Cultural Heritage</h3>
+                    <p>Digital exhibits can feature the AI as an interactive component, allowing visitors to ask questions about Pu Yi's life.</p>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-icon">📚</div>
+                    <h3>Historical Research</h3>
+                    <p>Researchers can quickly reference events and details from Pu Yi's autobiography for academic work.</p>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-icon">🎬</div>
+                    <h3>Documentary Production</h3>
+                    <p>Filmmakers can use the AI as a research assistant for accurate historical details in productions.</p>
+                </div>
+            </div>
+
+            <div class="challenges-section">
+                <h3>Challenges & Solutions</h3>
+                <table class="challenges-table">
+                    <thead>
+                        <tr>
+                            <th>Challenge</th>
+                            <th>Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Historical Accuracy</td>
+                            <td>Cross-referencing multiple authoritative sources; implemented fact-checking layer during data generation</td>
+                        </tr>
+                        <tr>
+                            <td>Temporal Consistency</td>
+                            <td>Temporal tagging and constraint-based generation; ensured chronological accuracy in responses</td>
+                        </tr>
+                        <tr>
+                            <td>Sensitive Topics</td>
+                            <td>Balanced presentation with multiple perspectives; implemented content filtering for politically sensitive content</td>
+                        </tr>
+                        <tr>
+                            <td>Limited Domain Data</td>
+                            <td>Data augmentation through synthetic question generation; leveraged transfer learning from pre-trained model</td>
+                        </tr>
+                        <tr>
+                            <td>Chinese-English Translation</td>
+                            <td>Custom tokenization for Chinese names; entity recognition and proper transliteration handling</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Implementation -->
+    <section id="documentation" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Implementation</h2>
+            
+            <div class="file-structure">
+                <h3>Project File Structure</h3>
+                <pre class="code-block">ernie-memories-project/
+├── book_chapters/              # Source material (9 chapter files)
+├── training_data/              # Generated instruction-output pairs
+├── data/
+│   ├── raw/                    # Raw source materials
+│   └── processed/              # Processed datasets
+├── models/fine_tuned/          # Fine-tuned model checkpoints
+├── training/                   # Training scripts and configs
+├── puyi_llama_factory_detailed.json  # Supplementary (259 entries)
+├── all_chapters_training_data.json   # Combined (7,152 entries)
+└── LLaMA-Factory/              # Fine-tuning framework</pre>
+            </div>
+
+            <div class="dependencies">
+                <h3>Dependencies</h3>
+                <div class="dep-grid">
+                    <div class="dep-item">
+                        <strong>google-generativeai</strong>
+                        <p>Gemini API for training pair generation</p>
+                    </div>
+                    <div class="dep-item">
+                        <strong>paddlepaddle-gpu / pytorch</strong>
+                        <p>Deep learning framework</p>
+                    </div>
+                    <div class="dep-item">
+                        <strong>transformers</strong>
+                        <p>Model loading and tokenization</p>
+                    </div>
+                    <div class="dep-item">
+                        <strong>datasets</strong>
+                        <p>Dataset handling</p>
+                    </div>
+                    <div class="dep-item">
+                        <strong>tqdm</strong>
+                        <p>Progress bars</p>
+                    </div>
+                    <div class="dep-item">
+                        <strong>numpy, pandas</strong>
+                        <p>Data manipulation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ethics-section">
+                <h3>Ethical Considerations</h3>
+                <div class="ethics-cards">
+                    <div class="ethics-card">
+                        <h4>Historical Sensitivity</h4>
+                        <ul>
+                            <li>Acknowledging controversial aspects of Pu Yi's collaboration with Japanese forces</li>
+                            <li>Balanced representation of different historical perspectives</li>
+                            <li>Avoiding presentism in historical judgments</li>
+                        </ul>
+                    </div>
+                    <div class="ethics-card">
+                        <h4>Bias Mitigation</h4>
+                        <ul>
+                            <li>Training data reviewed for historical bias and one-sided narratives</li>
+                            <li>Multiple source verification for factual claims</li>
+                            <li>Transparent about limitations and uncertainties</li>
+                        </ul>
+                    </div>
+                    <div class="ethics-card">
+                        <h4>Educational Responsibility</h4>
+                        <ul>
+                            <li>Clear labeling as AI-generated content</li>
+                            <li>Encouraging users to consult primary sources</li>
+                            <li>Providing historical context for complex events</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="future-enhancements">
+                <h3>Future Enhancements</h3>
+                <div class="future-grid">
+                    <div class="future-card">
+                        <h4>Short-term Goals</h4>
+                        <ul>
+                            <li>Expand dataset with additional primary sources</li>
+                            <li>Implement multi-turn conversation capability</li>
+                            <li>Add citation/source attribution for responses</li>
+                            <li>Develop web-based demo interface</li>
+                        </ul>
+                    </div>
+                    <div class="future-card">
+                        <h4>Long-term Vision</h4>
+                        <ul>
+                            <li>Extend to other historical figures and periods</li>
+                            <li>Multi-modal capabilities (image analysis)</li>
+                            <li>Integration with virtual museum experiences</li>
+                            <li>Support for multiple languages (Chinese, English, Japanese)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="section section-conclusion">
+        <div class="container">
+            <h2 class="section-title">Conclusion</h2>
+            <div class="conclusion-content">
+                <p class="lead">This project successfully demonstrates the application of domain-specific fine-tuning to create a specialized conversational AI system focused on historical education.</p>
+                
+                <div class="achievements">
+                    <h3>Key Achievements</h3>
+                    <div class="achievement-grid">
+                        <div class="achievement-item">
+                            <div class="achievement-icon">✓</div>
+                            <div class="achievement-text">
+                                <strong>Comprehensive Coverage</strong>
+                                <p>All major life periods from 1906-1967 represented in the dataset</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">✓</div>
+                            <div class="achievement-text">
+                                <strong>High Quality Generation</strong>
+                                <p>State-of-the-art Gemini 2.5 Flash used for training pair creation</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">✓</div>
+                            <div class="achievement-text">
+                                <strong>Well-Structured Data</strong>
+                                <p>Clean JSON format with source attribution and provenance tracking</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">✓</div>
+                            <div class="achievement-text">
+                                <strong>Production-Ready</strong>
+                                <p>Compatible with LLaMA Factory and standard fine-tuning pipelines</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">✓</div>
+                            <div class="achievement-text">
+                                <strong>Scalable Architecture</strong>
+                                <p>Modular pipeline allows easy expansion to additional sources</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="closing-text">The fine-tuned ERNIE-4.5-0.3B-PT model, trained on over 7,400 carefully crafted instruction-output pairs, shows significant capability in generating historically accurate and contextually appropriate responses about Pu Yi's life and times. By enabling engaging, first-person conversations about one of the most fascinating figures in modern Chinese history, this project bridges the gap between academic research and interactive learning.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About the Project</h4>
+                    <p>Fine-tuning ERNIE-4.5-0.3B-PT for historical conversational AI focused on Pu Yi, the Last Emperor of China.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#dataset">Dataset</a></li>
+                        <li><a href="#model">Model Architecture</a></li>
+                        <li><a href="#results">Results</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://en.wikipedia.org/wiki/Puyi" target="_blank">Pu Yi Wikipedia</a></li>
+                        <li><a href="https://github.com/hiyouga/LLaMA-Factory" target="_blank">LLaMA Factory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Author</h4>
+                    <p><strong>Shubham Gangwar</strong></p>
+                    <p>December 2025 • Version 1.0</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Puyi Historical AI Project. For educational and research purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
