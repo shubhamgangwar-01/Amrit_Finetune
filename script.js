@@ -249,3 +249,93 @@ const createMobileMenu = () => {
 
 window.addEventListener('resize', createMobileMenu);
 createMobileMenu();
+
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 500) {
+        backToTopButton.classList.add('visible');
+    } else {
+        backToTopButton.classList.remove('visible');
+    }
+});
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Enhanced scroll animations with stagger effect
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+
+    sections.forEach((section, index) => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, 100);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => sectionObserver.observe(section));
+});
+
+// Add stagger animation to grid items
+document.addEventListener('DOMContentLoaded', () => {
+    const addStaggerAnimation = (containerSelector, itemSelector) => {
+        const containers = document.querySelectorAll(containerSelector);
+
+        containers.forEach(container => {
+            const items = container.querySelectorAll(itemSelector);
+            items.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    };
+
+    addStaggerAnimation('.categories-grid', '.category-card');
+    addStaggerAnimation('.achievements-grid', '.achievement-stat');
+    addStaggerAnimation('.specs-grid', '.spec-item');
+    addStaggerAnimation('.guidelines-grid', '.guideline-card');
+});
+
+// Add parallax effect to memorial section
+window.addEventListener('scroll', () => {
+    const memorial = document.querySelector('.memorial-section');
+    if (memorial) {
+        const rect = memorial.getBoundingClientRect();
+        const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+
+        if (scrollPercent > 0 && scrollPercent < 1) {
+            memorial.style.backgroundPosition = `center ${50 + scrollPercent * 10}%`;
+        }
+    }
+});
+
+// Enhanced category card interactions
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryCards = document.querySelectorAll('.category-card');
+
+    categoryCards.forEach(card => {
+        card.addEventListener('mouseenter', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            this.style.setProperty('--mouse-x', `${x}px`);
+            this.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+});
